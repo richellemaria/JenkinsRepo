@@ -27,7 +27,15 @@ pipeline {
         stage('stage two') {
             environment {
                 ENV_URL = "stage.google.com"
-            }  
+            } 
+            input {
+                 message "Should we continue?"
+                 ok "Yes, we should."
+                 submitter "alice,bob"
+                 parameters {
+                   string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+                 }
+            } 
             steps {
                echo "This is stage two"
                echo "Name of the url is ${ENV_URL}"
