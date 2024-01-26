@@ -11,9 +11,9 @@ pipeline {
         choice(name: 'CHOICE', choices: ['One', 'Two', 'Three'], description: 'Pick something')
         password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
      }
-     triggers { 
-        cron('H/1 * * * *')
-     }
+    //  triggers { 
+    //     cron('H/1 * * * *')
+    //  }
       stages {
         stage('stage one') {
             steps {
@@ -42,6 +42,7 @@ pipeline {
             }     
         }
         stage('stage three') {
+            when { branch 'dev' }
             steps {
               sh '''
                echo "This is stage three"
@@ -49,6 +50,15 @@ pipeline {
                echo -e "\\e[31m Hii "
                '''
             }
+        }
+        stage('stage four'){
+            steps {
+              sh '''
+               echo "This is stage three"
+               echo "Name of the url is ${ENV_URL}"
+               echo -e "\\e[31m Welcome "
+               '''
+            }           
         }
 
       }
