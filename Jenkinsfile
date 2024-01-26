@@ -20,6 +20,7 @@ pipeline {
                sh '''
                echo "This is stage one"
                echo "Name of the url is ${ENV_URL}"
+               sleep 10
                env
                '''
            }
@@ -39,15 +40,20 @@ pipeline {
             steps {
                echo "This is stage two"
                echo "Name of the url is ${ENV_URL}"
+               sleep 10
             }     
         }
         stage('stage three') {
-            when { branch 'dev' }
+            when { 
+                branch 'dev' 
+                changeset "**/*.js"
+                }
             steps {
               sh '''
                echo "This is stage three"
                echo "Name of the url is ${ENV_URL}"
                echo -e "\\e[31m Hii "
+               sleep 10
                '''
             }
         }
@@ -57,6 +63,7 @@ pipeline {
                echo "This is stage three"
                echo "Name of the url is ${ENV_URL}"
                echo -e "\\e[31m Welcome "
+               sleep 10
                '''
             }           
         }
