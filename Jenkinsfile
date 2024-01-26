@@ -28,7 +28,7 @@ pipeline {
               sh '''
                echo "This is stage three"
                echo "Name of the url is ${ENV_URL}"
-               echo -e "\\e[0m Hii "
+               echo -e "\\e[31m Hii "
                '''
             }
         }
