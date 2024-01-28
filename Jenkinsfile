@@ -1,5 +1,7 @@
 pipeline {
-      agent any
+      agent {
+        label 'WS'
+      }
       environment {
            ENV_URL = "pipeline.google.com"
            SSHCRED = credentials('SSH_CRED')
@@ -92,5 +94,10 @@ pipeline {
             }           
         }
 
+      }
+      post{
+        always { 
+            cleanWs()
+        }
       }
 }
